@@ -6,6 +6,10 @@
    "basic-rim": "ZEN_SOL_rim_basic.wav",
    "percussion": "ff_ptt_percussion_high_fit.wav",
    "synth-body": "plx_apt_synth_body.wav",
-   "song-clip": "song-clip.wav"
+   "song-clip": "song-clip.wav",
+   "song1": "song1.wav",
+   "song2": "song2.wav",
+   "song3": "song3.wav",
+   "song4": "song4.wav"
  }
  
