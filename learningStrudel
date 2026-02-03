@@ -1,11 +1,19 @@
+
+
 ++++++++++ CONTROLS ++++++++++
+
+
 
 ctl + enter //play
 ctl + . //stop
 
 sound() can be abbreviated to s()
 
+
+
 ++++++++++ SOUNDS ++++++++++
+
+
 
 sound("metal")
 
@@ -15,7 +23,11 @@ sound("casio:5")
 
     select sample from sound - any number will correspond with one of the samples (12384329)
 
+
+
 ++++++++++ DRUMS ++++++++++
+
+
 
 bd = bass drum
 sd = snare drum
@@ -45,7 +57,11 @@ RolandTR808
 RolandTR707
 ViscoSpaceDrum
 
+
+
 ++++++++++ TEMPO ++++++++++
+
+
 
 cycle is 2s long by default
 
@@ -75,7 +91,11 @@ sound("<bd hh rim hh>*8")
 
     this shows 8th notes at 90bpm in 4/4 time
 
+
+
 ++++++++++ SEQUENCES ++++++++++
+
+
 
 sound("bd hh - rim - bd hh rim")
 
@@ -127,7 +147,11 @@ sound(`bd*2, - cp,
     - - - oh, hh*4,
     [- casio]*2") //this syntax would not work
 
+
+
 ++++++++++ N-FUNCTION ++++++++++
+
+
 
 sound("jazz:0 jazz:1 [jazz:4 jazz:2] jazz:3*2")
 
@@ -139,7 +163,11 @@ n("6 4 2 0").scale("C:minor").sound("piano")
 
     set note in scale
 
+
+
 ++++++++++ NOTES ++++++++++
+
+
 
 note("a b c d")
 
@@ -147,23 +175,44 @@ note("b g e c").sound("piano") //set pitch as letter
 
 note("20 100 55 90").sound("piano") //set pitch as number
 
+
+
 ++++++++++ FUNCTIONS ++++++++++
 
-note("[c a f e]/2") //slow down
 
-note("c <e g>") //alternate
 
-note("c@3 e") //elongate
+slow down (/)
 
-note("c!3 e") //replicate
+    note("[c a f e]/2")
 
-$: s("bd sd")
-$: note("c eb g")
+alternate (<>)
 
-    play patterns simultaneously
+    note("c <e g>")
+
+elongate (@)
+
+    note("c@3 e")
+
+replicate (!)
+    
+    note("c!3 e")
+
+play patterns simultaneously ($)
+
+    $: s("bd sd")
+    $: note("c eb g")
+
+create repeating patterns with specified step size (%)
+
+    s('kick%4')
+
+        kick once every 4 steps
+
 
 
 ++++++++++ AUDIO EFFECTS ++++++++++
+
+
 
 LPF 
     
@@ -204,7 +253,11 @@ sawtooth
 
     note("c2 c3 c2 c3").s("sawtooth")
 
+
+
 ++++++++++ PATTERN EFFECTS ++++++++++
+
+
 
 setcpm
 
@@ -254,14 +307,22 @@ off
 
         copy, shift time & modify
 
+
+
 ++++++++++ SAMPLES ++++++++++
+
+
 
 soundAlias('RolandTR808_bd', 'kick')
 s("kick")
 
     create custom aliases for existing sounds
 
+
+
 ++++++++++ SOUND BANKS ++++++++++
+
+
 
 s("RolandTR808_bd RolandTR808_sd,RolandTR808_hh*16")
 
@@ -275,7 +336,11 @@ s("bd sd,hh*16").bank("<RolandTR808 RolandTR909>")
 
     pattern bank to switch between different drum machines
 
+
+
 ++++++++++ SOUND SELECTION ++++++++++
+
+
 
 s("hh*8").bank("RolandTR909").n("0 1 2 3")
 
@@ -290,3 +355,250 @@ s("hh*8").bank("RolandTR909").n("0 1 2 3")
     s("bd*4,hh:0 hh:1 hh:2 hh:3 hh:4 hh:5 hh:6 hh:7").bank("RolandTR909")
 
         we can also use mini notation like this
+
+
+
+++++++++++ LOADING SAMPLES ++++++++++
+
+
+
+ONLINE
+
+GitHub repo: kaliryder/strudel/samples
+
+samples('https://raw.githubusercontent.com/kaliryder/strudel/main/samples/strudel.json')
+
+    this command loads the samples from the strudel.json file
+
+    {
+    "_base": "https://raw.githubusercontent.com/kaliryder/strudel/main/samples/",
+    "techno-kick-punchy": "FSS_RKHSOD_kick_techno_punchy.wav",
+    "saw-bass": "Saw_Bass01.wav",
+    "synth-bass": "UM_synth_bass_one_shot_clean_wub_F.wav",
+    "basic-rim": "ZEN_SOL_rim_basic.wav",
+    "percussion": "ff_ptt_percussion_high_fit.wav",
+    "synth-body": "plx_apt_synth_body.wav"
+    }
+        this is the format for the strudel.json file
+        _base is the folder it pulls from
+        _base must have a strudel.json file
+
+
+FROM DISK VIA IMPORT SOUNDS FOLDER
+
+REPL > sounds tab > import-sounds
+
+└─ samples
+   ├─ swoop
+   │  ├─ swoopshort.wav
+   │  ├─ swooplong.wav
+   │  └─ swooptight.wav
+   └─ smash
+      ├─ smashhigh.wav
+      ├─ smashlow.wav
+      └─ smashmiddle.wav
+
+        if you import a folder of samples, the folder can have sub-folders
+
+            select samples folder > user tab will contain two new sounds: swoop(3) and smash(3) > individual samples can be used like s("swoop:0 swoop:1 smash:2")
+
+                samples within each sound use zero-based indexing in alphabetical order
+
+
+
+++++++++++ PITCHING SAMPLES ++++++++++
+
+
+
+samples('https://raw.githubusercontent.com/kaliryder/strudel/main/samples/strudel.json')
+note("g3 [bb3 c4] <g4 f4 eb4 f3>@2").s("saw-bass").clip(1)
+.gain(.5)
+
+    specify base pitches for samples like this
+
+setcpm(60)
+samples({
+'gang': {
+  'bb2': 'Saw_Bass01.wav',
+  'c4': 'UM_synth_bass_one_shot_clean_wub_F.wav',
+  'eb4': 'ZEN_SOL_rim_basic.wav',
+}}, 'https://raw.githubusercontent.com/kaliryder/strudel/main/samples/')
+
+note("g2!2 <bb2 c3>!2, <c4@3 [<eb4 bb3> g4 f4]>")
+.s('gang').clip(1)
+.gain(.5)
+
+    i do not fully understand this but i think when you load samples as note names you can use notes and make them pull from your samples
+
+
+
+++++++++++ SHABDA ++++++++++
+
+
+
+samples('shabda:bass:4,hihat:4,rimshot:2')
+
+$: n("0 1 2 3 0 1 2 3").s('bass')
+$: n("0 1*2 2 3*2").s('hihat').clip(1)
+$: n("~ 0 ~ 1 ~ 0 0 1").s('rimshot')
+
+    can use samples from freesound.org but i do not know how to load in specific samples
+
+samples('shabda/speech:the_drum,hello')
+samples('shabda/speech/fr-FR/m:magnifique')
+
+$: s("the_drum*2").chop(16).speed(rand.range(0.85,1.1))
+$: s("hello magnifique").slow(4).late(0.125)
+
+    can generate artificial voice samples
+
+    default language code and gender parameters are en-GB and f
+
+
+
+++++++++++ SAMPLE EFFECTS ++++++++++
+
+
+
+begin
+
+    samples({ rave: 'rave/AREUREADY.wav' }, 'github:tidalcycles/dirt-samples')
+    s("rave").begin("<0 .25 .5 .75>").fast(2)
+
+        pattern of numbers from 0 to 1
+        skips beginning of each sample (e.g. 0.25 to cut off the first quarter from each sample)
+
+            amount (number|Pattern): between 0 and 1, where 1 is the length of the sample
+    
+end  
+
+    s("bd*2,oh*4").end("<.1 .2 .5 1>").fast(2)
+
+        same as begin but cuts the end
+
+            length (number|Pattern): 1 = whole sample, .5 = half sample, .25 = quarter sample etc..
+
+loop
+
+    s("casio").loop(1)
+
+        loops the sample. tempo of the loop is not synced with the cycle tempo
+        change tempo region using loopBegin and loopEnd
+
+            on (number|Pattern): If 1, the sample is looped
+
+loopBegin (loopb)
+
+    s("space").loop(1)
+    .loopBegin("<0 .125 .25>")._scope()
+
+        begins loop at specific point in sample in between begin and end and before loopEnd!
+        samples starting with wt_ (wavetable) will automatically loop
+        
+            time (number|Pattern): between 0 and 1, where 1 is the length
+
+loopEnd (loope)
+
+    s("space").loop(1)
+    .loopEnd("<1 .75 .5 .25>")._scope()
+
+        same as loopBegin but ends looping at a specific point of the sample
+        
+            time (number|Pattern): between 0 and 1, where 1 is the length
+
+cut
+
+    s("[oh hh]*4").cut(1)
+
+        will stop playing a sample as soon as another sample in the same cutgroup is played
+        (e.g. an open hi-hat muted by the following closed hi-hat)
+        
+            group (number|Pattern): cut group number
+
+clip (legato)
+
+    note("c a f e").s("piano").clip("<.5 1 2>")
+
+        multiplies the duration of the sample with the given number
+        will cut samples off if they exceed the duration
+
+            factor (number|Pattern): = 0
+
+loopAt
+
+    samples({ rhodes: 'https://cdn.freesound.org/previews/132/132051_316502-lq.mp3' })
+    s("rhodes").loopAt(2)
+
+        makes samples fit given number of cycles by changing the speed
+
+fit
+
+    samples({ rhodes: 'https://cdn.freesound.org/previews/132/132051_316502-lq.mp3' })
+    s("rhodes/2").fit()
+
+        makes sample fit its event duration
+        good for rhythmic loops like drum breaks
+        similar to loopAt
+
+chop
+
+    samples({ rhodes: 'https://cdn.freesound.org/previews/132/132051_316502-lq.mp3' })
+    s("rhodes")
+    .chop(4)
+    .rev() // reverse order of chops
+    .loopAt(2) // fit sample into 2 cycles
+
+        cuts each sample into given number of parts
+        explores a technique called 'granular synthesis'
+        turns a pattern of samples into a pattern of parts of samples
+
+striate
+
+    s("numbers:0 numbers:1 numbers:2").striate(6).slow(3)
+
+        cuts sample into given number of parts
+        triggers progressive portions of each sample at each loop
+
+slice
+
+    samples('github:tidalcycles/dirt-samples')
+    s("breaks165").slice(8, "0 1 <2 2*2> 3 [4 0] 5 6 7".every(3, rev)).slow(0.75)
+
+    samples('github:tidalcycles/dirt-samples')
+    s("breaks125").fit().slice([0,.25,.5,.75], "0 1 1 <2 3>")
+
+        chops samples into given number of slices
+        triggers those slices with a given pattern of slice numbers
+        instead of a number, it also accepts a list of numbers from 0 to 1 to slice at specific points
+
+splice
+
+    samples('github:tidalcycles/dirt-samples')
+    s("breaks165")
+    .splice(8,  "0 1 [2 3 0]@2 3 0@2 7")
+
+        works the same as slice but changes the playback speed of each slice to match the duration of its step
+
+scrub
+
+    samples('github:switchangel/pad')
+    s("swpad:0").scrub("{0.1!2 .25@3 0.7!2 <0.8:1.5>}%8")
+
+    samples('github:yaxu/clean-breaks/main');
+    s("amen/4").fit().scrub("{0@3 0@2 4@3}%8".div(16))
+
+        allows you to scrub an audio file like a tape loop
+        passes values that represent the position in the audio file
+        optional array syntax (ex. "0.5:2")
+        second value controls speed of playback
+
+speed
+
+    s("bd*6").speed("1 2 4 1 -2 -4")
+
+    speed("1 1.5*2 [2 1.1]").s("piano").clip(1)
+
+        changes the speed of sample playback
+        a cheap way of changing pitch
+
+            speed (number|Pattern): inf to inf, negative numbers play the sample backwards
