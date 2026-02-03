@@ -366,7 +366,7 @@ ONLINE
 
 GitHub repo: kaliryder/strudel/samples
 
-samples('https://raw.githubusercontent.com/kaliryder/strudel/main/samples/strudel.json')
+samples('https://github.com/kaliryder/strudel/main/samples/strudel.json')
 
     this command loads the samples from the strudel.json file
 
@@ -377,7 +377,8 @@ samples('https://raw.githubusercontent.com/kaliryder/strudel/main/samples/strude
     "synth-bass": "UM_synth_bass_one_shot_clean_wub_F.wav",
     "basic-rim": "ZEN_SOL_rim_basic.wav",
     "percussion": "ff_ptt_percussion_high_fit.wav",
-    "synth-body": "plx_apt_synth_body.wav"
+    "synth-body": "plx_apt_synth_body.wav",
+    "song": "風たちぬ今和歌春神髪(BlackXmas Monk Mix).mp3"
     }
         this is the format for the strudel.json file
         _base is the folder it pulls from
