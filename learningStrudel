@@ -1,0 +1,277 @@
+++++++++++ CONTROLS ++++++++++
+
+ctl + enter //play
+ctl + . //stop
+
+sound() can be abbreviated to s()
+
+++++++++++ SOUNDS ++++++++++
+
+sound("metal")
+
+    some standard sounds: insect wind jazz metal east crow casio space numbers
+
+sound("casio:5")
+
+    select sample from sound - any number will correspond with one of the samples (12384329)
+
+++++++++++ DRUMS ++++++++++
+
+bd = bass drum
+sd = snare drum
+rim = rimshot
+hh = hihat
+oh = open hihat
+lt = low tom
+mt = middle tom
+ht = high tom
+rd = ride cymbal
+cr = crash cymbal
+
+sh = shakers
+cb = cowbell
+tb = tambourine
+perc = other percussions
+misc = miscellaneous samples
+fx = effects
+
+sound("bd hh sd oh").bank("RolandTR707")
+
+    change drum machine with bank
+
+AkaiLinn
+RhythmAce
+RolandTR808
+RolandTR707
+ViscoSpaceDrum
+
+++++++++++ TEMPO ++++++++++
+
+cycle is 2s long by default
+
+sound("rim rim rim rim rim rim")
+    
+    this will play all 6 rims in one cycle
+
+sound("<bd bd hh bd rim bd hh bd>")
+
+    this will play one sound per cycle
+
+sound("<bd bd hh bd rim bd>*8")
+
+    this will play one sound per cycle, but speed up the whole thing 8x faster
+
+    sound("<bd bd hh bd rim rim rim rim bd>*8")
+
+        you can add elements but the tempo will stay the same
+
+setcpm(120/4)
+sound("<bd hh rim hh>*8")
+
+    the default tempo is 30 cycles per minute = 120/4 = 1 cycle every 2 seconds
+
+setcpm(90/4)
+sound("<bd hh rim hh>*8")
+
+    this shows 8th notes at 90bpm in 4/4 time
+
+++++++++++ SEQUENCES ++++++++++
+
+sound("bd hh - rim - bd hh rim")
+
+    - or ~ will add a rest
+
+sound("bd [hh hh] sd [hh bd] bd - [hh sd] cp")
+
+    create sub-sequences inside brackets [] to fit multiple sounds into one increment
+
+    sound("bd [hh hh hh hh hh hh hh hh hh] sd [hh bd] bd - [hh sd] cp")
+
+        you can add as many as you want
+
+sound("bd hh*2 rim hh*3 bd [- hh*2] rim hh*2")
+
+    multiplying a sound will make it multiple times within an increment
+
+sound("bd [hh rim]*2 bd [hh rim]*1.5")
+
+    multiplying a sub-sequence will make it play for multiple increments
+
+    sound("bd hh*32 rim hh*16")
+
+        you can multiply as much as you want
+
+sound("bd [[rim rim] hh] bd cp")
+
+    sub-sub-sequences, nest as many as you want
+
+sound("hh hh hh, bd casio")
+
+    play sequences simultaneously with commas
+
+    sound("hh hh hh, bd bd, - casio")
+
+        use as many commas as you want
+
+    sound("hh hh hh, bd [bd,casio]")
+
+        even inside sequences
+
+sound(`bd*2, - cp, 
+- - - oh, hh*4,
+[- casio]*2`)
+
+    multiple lines with backticks
+
+    sound("bd*2, - cp, 
+    - - - oh, hh*4,
+    [- casio]*2") //this syntax would not work
+
+++++++++++ N-FUNCTION ++++++++++
+
+sound("jazz:0 jazz:1 [jazz:4 jazz:2] jazz:3*2")
+
+    instad of this, we can use this:
+
+    n("0 1 [4 2] 3*2").sound("jazz")
+
+n("6 4 2 0").scale("C:minor").sound("piano")
+
+    set note in scale
+
+++++++++++ NOTES ++++++++++
+
+note("a b c d")
+
+note("b g e c").sound("piano") //set pitch as letter
+
+note("20 100 55 90").sound("piano") //set pitch as number
+
+++++++++++ FUNCTIONS ++++++++++
+
+note("[c a f e]/2") //slow down
+
+note("c <e g>") //alternate
+
+note("c@3 e") //elongate
+
+note("c!3 e") //replicate
+
+$: s("bd sd")
+$: note("c eb g")
+
+    play patterns simultaneously
+
+
+++++++++++ AUDIO EFFECTS ++++++++++
+
+LPF 
+    
+    note("c2 c3 c2 c3").lpf("100 2000 400 2000")
+
+vowel
+
+    note("c3 eb3 g3 eb3").vowel("a e i o")
+
+gain
+
+    s("hh hh hh hh hh hh hh hh").gain(.25)
+    s("hh*16").gain("[.25 1]*4") //gain sequence
+
+delay
+
+    s("bd rim bd cp").delay(0.5)
+
+room
+
+    s("bd rim bd cp").room(.5)
+
+pan
+
+    s("bd rim bd cp").pan("0 1")
+
+speed
+
+    s("bd rim bd cp").speed("<1 2 -1 -2>")
+
+        seems to control speed of the sounds themselves
+
+range
+
+    s("hh*32").lpf(saw.range(200,4000))
+
+sawtooth
+
+    note("c2 c3 c2 c3").s("sawtooth")
+
+++++++++++ PATTERN EFFECTS ++++++++++
+
+setcpm
+
+    setcpm(60); sound("bd sd [~ bd] sd")
+
+        sets the tempo in cycles per minute
+
+fast
+
+    sound("bd sd [~ bd] sd").fast(2)
+
+        speed up
+
+slow
+
+    sound("bd sd [~ bd] sd").slow(2)
+
+        slow down
+
+rev
+
+    n("0 2 4 6").scale("C:minor").rev()
+
+        reverse
+
+jux
+
+    n("0 2 4 6").scale("C:minor").jux(rev)
+
+        split left / right, modify right
+
+add
+
+    n("0 2 4 6".add("<0 1 2 1>")).scale("C:minor")
+
+        add numbers / notes
+
+ply
+
+    s("bd sd").ply("<1 2 3>")
+
+        speed up each event n times
+
+off
+
+    s("bd sd, hh*8").off(1/8, x=>x.speed(8))
+
+        copy, shift time & modify
+
+++++++++++ SAMPLES ++++++++++
+
+soundAlias('RolandTR808_bd', 'kick')
+s("kick")
+
+    create custom aliases for existing sounds
+
+++++++++++ SOUND BANKS ++++++++++
+
+s("RolandTR808_bd RolandTR808_sd,RolandTR808_hh*16")
+
+    full syntax for loading different sounds from drum machines
+
+s("bd sd,hh*16").bank("RolandTR808")
+
+    bank function shortens the syntax
+
+s("bd sd,hh*16").bank("<RolandTR808 RolandTR909>")
+
+    pattern bank to switch between different drum machines
+
