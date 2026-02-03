@@ -6,8 +6,11 @@
 
 ctl + enter //play
 ctl + . //stop
+cmd + shift + R //reset cache on REPL to load samples from GitHub
 
 sound() can be abbreviated to s()
+
+to record sound from strudel into ableton, use blackhole as audio output for computer and audio input for ableton
 
 
 

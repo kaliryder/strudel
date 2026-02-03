@@ -1,3 +1,7 @@
+++++++++++ SAMPLE IMPORT ++++++++++
+
+samples('https://raw.githubusercontent.com/kaliryder/strudel/main/samples/strudel.json')
+
 ++++++++++ SONG 1 ++++++++++
 
 Hard and Stormy and Synthy
@@ -8,3 +12,32 @@ $: s("techno_kick_punchy techno_kick_punchy <techno_kick_punchy -@> techno_kick_
 $: s("- - - - <- percussion> - - -")
 $: s("sd sd sd sd sd sd [sd*8] sd").gain("0.2")
 $: s("synth-bass").splice(8, "3 4 [2 7] <3 [4 2*4]>").gain(2)
+
+++++++++++ SONG 2 ++++++++++
+
+Random and Choppy and Wet
+
+$: s("song-clip").splice(100, "[10|25|32|40|55|20|75|40]*8").lpf(saw.range(200,2000))
+$: s("bd bd bd bd")
+$: s("- hh - - - hh - -")
+$: s("song-clip song-clip*2 song-clip <song-clip ->").fit().lpf(saw.range(200,2000)).every(3, rev).gain(0.5)
+
+++++++++++ SONG 3 ++++++++++
+
+Stomping and Vocals and Robot
+
+samples('shabda/speech:i,didnt,wanna,go,but,had,to,you,dont,have')
+
+$: s("[<i -> - <didnt dont> - <wanna wanna -> - <go go*3> - but - <i you> - <had have> - to -]*2").begin("0.1").room(0.8)
+$: s("bd bd bd bd").gain(2)
+$: s("lt lt lt lt lt lt lt lt").delay("0 0.1 0.2 0.3 0.4 0.5 0.6 0.7").gain(1)
+
+++++++++++ SONG 4 ++++++++++
+
+Video Game and Storm and Running
+
+$: note("<[<c2 c3> e [g b] -] [a c <e e3> g] [- [d*2 f] <a1 a3> <c c*4>] [- g [b d] f]>*4").s("song-clip").begin("0.105").end("0.11")
+$: s("lt lt lt lt lt lt <lt lt*2> lt").bank("RolandTR808").gain(2)
+$: s("sd*8").bank("RolandTR808").gain("1.2 1.4 1.6 1.8").room("0.2 0.4 0.6 0.8")
+$: s("lt lt lt lt")
+$: s("- hh - hh - hh - <hh hh*4>")
