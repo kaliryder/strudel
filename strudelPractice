@@ -1,0 +1,10 @@
+++++++++++ SONG 1 ++++++++++
+
+Hard and Stormy and Synthy
+
+$: note("<g3 g3 g3 f3*8> [bb3 c4] <g4 f4 eb4 f3>@2").s("synth-body").clip(1)
+$: s("- [- basic-rim]").gain("1")
+$: s("techno_kick_punchy techno_kick_punchy <techno_kick_punchy -@> techno_kick_punchy")
+$: s("- - - - <- percussion> - - -")
+$: s("sd sd sd sd sd sd [sd*8] sd").gain("0.2")
+$: s("synth-bass").splice(8, "3 4 [2 7] <3 [4 2*4]>").gain(2)
