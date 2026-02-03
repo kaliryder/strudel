@@ -1,9 +1,10 @@
 {
-  "_base": "https://github.com/kaliryder/strudel/tree/main/samples",
-  "techno_kick_punchy": "FSS_RKHSOD_kick_techno_punchy.wav",
-  "saw-bass": "Saw_Bass01.wav",
-  "synth-bass": "UM_synth_bass_one_shot_clean_wub_F.wav",
-  "basic-rim": "ZEN_SOL_rim_basic.wav",
-  "percussion": "ff_ptt_percussion_high_fit.wav",
-  "synth-body": "plx_apt_synth_body.wav"
-}
+   "_base": "https://raw.githubusercontent.com/kaliryder/strudel/main/samples/",
+   "techno_kick_punchy": "FSS_RKHSOD_kick_techno_punchy.wav",
+   "saw-bass": "Saw_Bass01.wav",
+   "synth-bass": "UM_synth_bass_one_shot_clean_wub_F.wav",
+   "basic-rim": "ZEN_SOL_rim_basic.wav",
+   "percussion": "ff_ptt_percussion_high_fit.wav",
+   "synth-body": "plx_apt_synth_body.wav"
+ }
+ 
