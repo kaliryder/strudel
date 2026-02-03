@@ -1,1 +1,18 @@
-Warning: File already exists at /Users/Kali/GitHub/strudel/samples/strudel.json. Overwrite? (y/N): 
+{"samples":["/FSS_RKHSOD_kick_techno_punchy.wav","/Saw_Bass01.wav","/UM_synth_bass_one_shot_clean_wWrote json to /Users/Kali/GitHub/strudel/samples/strudel.json
+ _____________________________
+< welcome to @strudel/sampler >
+ -----------------------------
+        \   ^__^
+         \  (oO)\_______
+            (__)\       )\/\
+             U  ||----w |
+                ||     ||
+@strudel/sampler is now serving audio files from:
+ /Users/Kali/GitHub/strudel/samples
+
+To use them in the Strudel REPL, run:
+ samples('http://localhost:5432')
+
+Or on a machine in the same network:
+ samples('http://10.5.0.2:5432')
+
