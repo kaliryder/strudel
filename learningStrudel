@@ -275,3 +275,18 @@ s("bd sd,hh*16").bank("<RolandTR808 RolandTR909>")
 
     pattern bank to switch between different drum machines
 
+++++++++++ SOUND SELECTION ++++++++++
+
+s("hh*8").bank("RolandTR909").n("0 1 2 3")
+
+    each drum machine has a specific amount of samples available
+    by default will play the first sample
+    but we can select them by using n
+
+    s("hh*8").bank("RolandTR909").n("0 1 2 3 4 5 6 7")
+
+        numbers that are too high will wrap around to the beginning
+    
+    s("bd*4,hh:0 hh:1 hh:2 hh:3 hh:4 hh:5 hh:6 hh:7").bank("RolandTR909")
+
+        we can also use mini notation like this

@@ -1,18 +1,9 @@
-{"samples":["/FSS_RKHSOD_kick_techno_punchy.wav","/Saw_Bass01.wav","/UM_synth_bass_one_shot_clean_wWrote json to /Users/Kali/GitHub/strudel/samples/strudel.json
- _____________________________
-< welcome to @strudel/sampler >
- -----------------------------
-        \   ^__^
-         \  (oO)\_______
-            (__)\       )\/\
-             U  ||----w |
-                ||     ||
-@strudel/sampler is now serving audio files from:
- /Users/Kali/GitHub/strudel/samples
-
-To use them in the Strudel REPL, run:
- samples('http://localhost:5432')
-
-Or on a machine in the same network:
- samples('http://10.5.0.2:5432')
-
+{
+  "_base": "https://github.com/kaliryder/strudel/tree/main/samples",
+  "techno_kick_punchy": "FSS_RKHSOD_kick_techno_punchy.wav",
+  "saw-bass": "Saw_Bass01.wav",
+  "synth-bass": "UM_synth_bass_one_shot_clean_wub_F.wav",
+  "basic-rim": "ZEN_SOL_rim_basic.wav",
+  "percussion": "ff_ptt_percussion_high_fit.wav",
+  "synth-body": "plx_apt_synth_body.wav"
+}
