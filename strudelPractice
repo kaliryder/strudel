@@ -41,3 +41,15 @@ $: s("lt lt lt lt lt lt <lt lt*2> lt").bank("RolandTR808").gain(2)
 $: s("sd*8").bank("RolandTR808").gain("1.2 1.4 1.6 1.8").room("0.2 0.4 0.6 0.8")
 $: s("lt lt lt lt")
 $: s("- hh - hh - hh - <hh hh*4>")
+
+++++++++++ SONG 5 ++++++++++
+
+Tunnel and No and Maybe and Yes
+
+samples('shabda/speech:yes,no,maybe')
+
+$: s("<song1!3 song3> song2 - <song3 song2*8>").fit().gain(0.8)
+$: s("saw-bass*8").gain(1)
+$: s("lt lt lt lt").gain(1)
+$: s("hh hh - hh - hh - -").gain(1)
+$: s("- - - <no maybe - yes>").gain("0 0 0 <1.25 1.5 0 2>")
