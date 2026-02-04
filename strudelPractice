@@ -1,10 +1,20 @@
+
+
 ++++++++++ SAMPLE IMPORT ++++++++++
+
+
 
 samples('https://raw.githubusercontent.com/kaliryder/strudel/main/samples/strudel.json')
 
+
+
 ++++++++++ SONG 1 ++++++++++
 
+
+
 Hard and Stormy and Synthy
+
+
 
 $: note("<g3 g3 g3 f3*8> [bb3 c4] <g4 f4 eb4 f3>@2").s("synth-body").clip(1)
 $: s("- [- basic-rim]").gain("1")
@@ -13,18 +23,30 @@ $: s("- - - - <- percussion> - - -")
 $: s("sd sd sd sd sd sd [sd*8] sd").gain("0.2")
 $: s("synth-bass").splice(8, "3 4 [2 7] <3 [4 2*4]>").gain(2)
 
+
+
 ++++++++++ SONG 2 ++++++++++
 
+
+
 Random and Choppy and Wet
+
+
 
 $: s("song-clip").splice(100, "[10|25|32|40|55|20|75|40]*8").lpf(saw.range(200,2000))
 $: s("bd bd bd bd")
 $: s("- hh - - - hh - -")
 $: s("song-clip song-clip*2 song-clip <song-clip ->").fit().lpf(saw.range(200,2000)).every(3, rev).gain(0.5)
 
+
+
 ++++++++++ SONG 3 ++++++++++
 
+
+
 Stomping and Vocals and Robot
+
+
 
 samples('shabda/speech:i,didnt,wanna,go,but,had,to,you,dont,have')
 
@@ -32,9 +54,15 @@ $: s("[<i -> - <didnt dont> - <wanna wanna -> - <go go*3> - but - <i you> - <had
 $: s("bd bd bd bd").gain(2)
 $: s("lt lt lt lt lt lt lt lt").delay("0 0.1 0.2 0.3 0.4 0.5 0.6 0.7").gain(1)
 
+
+
 ++++++++++ SONG 4 ++++++++++
 
+
+
 Video Game and Storm and Running
+
+
 
 $: note("<[<c2 c3> e [g b] -] [a c <e e3> g] [- [d*2 f] <a1 a3> <c c*4>] [- g [b d] f]>*4").s("song-clip").begin("0.105").end("0.11")
 $: s("lt lt lt lt lt lt <lt lt*2> lt").bank("RolandTR808").gain(2)
@@ -42,9 +70,15 @@ $: s("sd*8").bank("RolandTR808").gain("1.2 1.4 1.6 1.8").room("0.2 0.4 0.6 0.8")
 $: s("lt lt lt lt")
 $: s("- hh - hh - hh - <hh hh*4>")
 
+
+
 ++++++++++ SONG 5 ++++++++++
 
+
+
 Tunnel and No and Maybe and Yes
+
+
 
 samples('shabda/speech:yes,no,maybe')
 
@@ -53,3 +87,40 @@ $: s("saw-bass*8").gain(1)
 $: s("lt lt lt lt").gain(1)
 $: s("hh hh - hh - hh - -").gain(1)
 $: s("- - - <no maybe - yes>").gain("0 0 0 <1.25 1.5 0 2>")
+
+
+
+++++++++++ SONG 6 ++++++++++
+
+
+
+The Bay Remix
+
+
+
+setcpm(120/4)
+
+$: s("lt lt lt lt lt lt lt lt")
+  .room("0.3")
+
+$: s("- clap - clap - [- clap*4] clap -")
+
+$: s("saw-bass*4").room(0)
+
+$: s("- hh - hh - hh - hh").gain(2)
+
+$: note("c2 <eb2 <g2 g1*4>>".fast(2))
+.sound("pink")
+._scope()
+  
+$: s("hh*2,<white pink brown>*8")
+  .decay(0).sustain(0)._scope()
+
+$: s("paris").loop(1).begin("0.3").speed(1).room(0.4).gain(0.8)
+$: s("so-good <paris paris*4>").loop(1).begin("0.2 0.2").speed(1).room(0.8)
+$: s("- paris - -").loop(1).begin("0.5").speed(0.8).room(0.8).gain(0.6)
+$: s("so-good").loop(1).begin("0.8").speed(1).room(0.6)
+$: s("so-good*8").loop(1).begin("0.9").speed(1).room(0.7)
+$: s("paris - <- lt> <so-good -> ").loop(1).begin("0.5 0.2 0.5 0.5").speed(1).decay(0.9)
+
+    // s("paris").loopAt(7) loops whole sample

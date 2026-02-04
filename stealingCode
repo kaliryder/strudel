@@ -1,0 +1,70 @@
+/********** JAKE SONDY INSTAGRAM **********/
+
+setcpm(136/4)
+var key = "F#:major"
+
+const kickPatterns = [
+  "[x ~ ~ ~ ~ ~ ~ ~ x ~ ~ ~ ~ ~ ~ ~]",
+  "[x ~ ~ ~ x ~ ~ ~ x ~ ~ ~ x ~ ~ ~]",
+  "[x ~ ~ ~ x ~ ~ ~ x ~ ~ x ~ ~ x ~]",
+  "[x ~ ~ x ~ ~ x ~ x ~ ~ x ~ ~ x ~]",
+  "[x ~ ~ x ~ ~ x ~ ~ x ~ ~ x ~ ~ ~]"
+]
+
+const bassPatterns = [
+  "[x ~ ~ ~ ~ ~ ~ ~ x ~ ~ ~ ~ ~ ~ ~]",
+  "[x ~ ~ ~ x ~ ~ ~ x ~ ~ ~ x ~ ~ ~]",
+  "[x ~ ~ ~ x ~ ~ ~ x ~ ~ x ~ ~ x ~]",
+  "[x ~ ~ x ~ ~ x ~ x ~ ~ x ~ ~ x ~]",
+  "[x ~ ~ x ~ ~ x ~ ~ x ~ ~ x ~ ~ ~]"
+]
+
+var kickPattern = 2
+var bassPattern = 1
+var feel = 1
+
+var filt = (slider(5000, 20, 5000))
+
+const feels = [
+  "[~ x]*1", "[~ x]*2", "[~ x]*4", "[~ x ~ [~ x]]"
+]
+
+soundAlias("strudel:1", "smpl")
+
+kick: s("bd").bank("rolandtr909")
+  .struct(kickPatterns[kickPattern])
+  .speed(0.5).gain(2)._punchcard()
+
+snare: s("bd").bank("rolandtr808")
+  .struct(feels[feel])
+  .speed(1).gain(slider(5, 0, 5)).room(2).lpf(filt)._punchcard()
+
+hh: s("hh").bank("rolandtr909")
+  .struct("[hh hh]*8")
+  .speed(1).crush(9)
+  .lpf(filt).gain("[0.1 0.3]*4")
+  .color("magenta purple white")._spiral()
+  
+bass: "[0@3 [6 7@2 6@3 4@2]]/2".add("-14").add("<0 -2>/4").sound("hh")
+  .layer(
+    x => x.s("saw, square").pan("0").phaser(0.5),
+    x => x.s("saw, square").pan("1").phaser(1),
+    x => x.s("pink").pan("0").gain("0.5"),
+    x => x.s("pink").pan("1").gain("0.5")
+  ).lpf(filt).note().color("cyan magenta")._pitchwheel()
+
+sample1: n("5").s("so-good")
+  .fit().loopAt(4)
+  .gain(slider(0.47, 0, 5))
+  ._scope()
+  
+sample2: s("paris").gain(slider(0, 0, 5))
+  .slice(16, "<1 2 3 4 [5!4] 6 [7!4] [8]>*8")
+  .jux(rev)._scope()
+  
+sineWaveDive: s("sine/8")
+  .penv("24").pdec("4").sustain(0)
+  .delay(0.8).crush(4)
+  .jux(rev).room(1).roomsize(6)
+  .gain(0.15).lpf(filt)
+  .pcurve(0)
