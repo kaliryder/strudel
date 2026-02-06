@@ -15,12 +15,10 @@
    "so-good": "so-good-in-the-bay.wav",
    "drum-break": "drum-break.wav",
    "hold-on": "hold-on.wav",
-   "splice": {
-      "twinkle": "twinkle.wav",
-      "squeeze-toy": "squeeze-toy.wav",
-      "bubble-pop": "bubble-pop.wav",
-      "squeak-drip": "squeak-drip.wav",
-      "wub": "wub.wav"
-   }
+   "twinkle": "twinkle.wav",
+   "squeeze-toy": "squeeze-toy.wav",
+   "bubble-pop": "bubble-pop.wav",
+   "squeak-drip": "squeak-drip.wav",
+   "wub": "wub.wav"
  }
  
