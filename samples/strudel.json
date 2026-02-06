@@ -14,11 +14,13 @@
    "paris": "paris-london-berlin.wav",
    "so-good": "so-good-in-the-bay.wav",
    "drum-break": "drum-break.wav",
+   "splice": {
    "hold-on": "hold-on.wav",
    "twinkle": "twinkle.wav",
    "squeeze-toy": "squeeze-toy.wav",
    "bubble-pop": "bubble-pop.wav",
    "squeak-drip": "squeak-drip.wav",
    "wub": "wub.wav"
+   }
  }
  
