@@ -124,3 +124,120 @@ $: s("so-good*8").loop(1).begin("0.9").speed(1).room(0.7)
 $: s("paris - <- lt> <so-good -> ").loop(1).begin("0.5 0.2 0.5 0.5").speed(1).decay(0.9)
 
     // s("paris").loopAt(7) loops whole sample
+
+
+
+++++++++++ SONG 7 ++++++++++
+
+
+
+The Bay Chopped Vocals
+
+
+
+setCpm(170/4)
+
+$kick: stack(
+  s("bd:4!4")
+  .bank("AkaiLinn")
+  .gain(slider(2.187,0,3))
+  .speed(0.8)
+  ._punchcard())
+
+$snare: s("<sd:1>")
+  .beat("2,4,6,12?",16).note("c e".sub(12))
+  .bank("rolandtr808")
+  .gain(slider(1.137,0,3))
+  .speed("0.8|0.5")
+  .duck("3:4:5")
+  .room(0.8)
+
+$clap: s("clap*2")
+  .beat("2,4,10,12",16)
+  .gain(slider(1.224,0,3))
+  .speed(3)
+  .duck("3:4:5")
+  .room(0.8)
+
+$hat: s("hh:3")
+  .beat("2,6?,8,10?,12,14,16?",16)
+  .bank("rolandtr808")
+  .gain(slider(1.44,0,3))
+  .speed(3)
+  .room(0.8)
+
+$bass: s("supersaw!4")
+  // .note("<[e a d g]/2 [c e g b]/2>".sub(12))
+  .note("c".sub(12))
+  .orbit(2)
+  .gain(slider(0.69))
+  .lpenv("2")
+  .duck("3:4:5")
+  ._punchcard()
+
+$riser: s("pulse!16").dec(0.1).fm(time).fmh(time).orbit(5)
+
+$vox: s("so-good")
+  .scrub(berlin.fast(1)
+  .seg(8))
+  .duck("3:4:5")
+  .orbit(2)
+  .rib(13,2)
+  .delay(1).delaytime(rand)
+  .room(1).roomsize(5)
+
+
+
+++++++++++ SONG 7 ++++++++++
+
+
+
+Coming of Age Type Beat
+
+
+
+  setcpm(134/4)
+
+const kickPatterns = [
+  "[x ~ ~ ~ ~ ~ ~ ~ x ~ ~ ~ ~ ~ ~ ~]",
+  "[x ~ ~ ~ x ~ ~ ~ x ~ ~ ~ x ~ ~ ~]",
+  "[x ~ ~ ~ x ~ ~ ~ x ~ ~ x ~ ~ x ~]",
+  "[x ~ ~ x ~ ~ x ~ x ~ ~ x ~ ~ x ~]",
+  "[x ~ ~ x ~ ~ x ~ ~ x ~ ~ x ~ ~ ~]"
+]
+
+const clapPatterns = [
+  "[~ ~ ~ ~ ~ ~ x ~ ~ ~ ~ ~ ~ ~ ~ ~]",
+  "[~ ~ ~ ~ ~ ~ x ~ ~ ~ ~ ~ ~ ~ x ~]"
+]
+
+const vibes = [
+ "[~ ~ x]*1", "[~ x]*2", "[x x ~ x ~ ~ x ~ ~]", "[~ x x ~]*4", "[~ x ~ [~ x]]"
+]
+
+var kickPattern = 4
+var clapPattern = 1
+
+kick: s("bd").bank("RhythmAce")
+  .struct(kickPatterns[kickPattern])
+
+bass: stack(
+  s("sawtooth*8")
+     .note("c e b <g g a a>")
+     .gain(slider(0.363,0,1))
+     .duck("3:4:5"),
+  s("supersaw*8")
+     .gain(slider(1,0,1))
+     .speed(1)
+     .duck("3:4:5")
+)
+
+snare: s("sd:2").bank("RhythmAce")
+  .struct(kickPatterns[kickPattern])
+  .gain(slider(0.422,0,1))
+
+hat: s("<<hh*8 hh*16> hh*4 [<hh*8 hh*2> hh*4]>")
+  .bank("rolandtr808")
+
+clap: s("clap:2")
+  .struct(clapPatterns[clapPattern]).speed(1.8).gain(slider(1.04,0,2))
