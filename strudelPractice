@@ -188,7 +188,7 @@ $vox: s("so-good")
 
 
 
-++++++++++ SONG 7 ++++++++++
+++++++++++ SONG 8 ++++++++++
 
 
 
@@ -241,3 +241,106 @@ hat: s("<<hh*8 hh*16> hh*4 [<hh*8 hh*2> hh*4]>")
 
 clap: s("clap:2")
   .struct(clapPatterns[clapPattern]).speed(1.8).gain(slider(1.04,0,2))
+
+
+
+++++++++++ SONG 9 ++++++++++
+
+
+
+Bubbly and Rhythmic
+
+
+
+setcpm(134/4)
+
+const kickPatterns = [
+  "[x ~ ~ ~ ~ ~ ~ ~ x ~ ~ ~ ~ ~ ~ ~]",
+  "[x ~ ~ ~ x ~ ~ ~ x ~ ~ ~ x ~ ~ ~]",
+  "[x ~ ~ ~ x ~ ~ ~ x ~ ~ x ~ ~ x ~]",
+  "[x ~ ~ x ~ ~ x ~ x ~ ~ x ~ ~ x ~]",
+  "[x ~ ~ x ~ ~ x ~ ~ x ~ ~ x ~ ~ ~]"
+]
+
+const vibes = [
+ "[~ x]*1", "[~ x ~ [~ x]]", "[~ x]*2", "[x ~ ~ x ~ ~ x ~ ]", "[x x?]*4"
+]
+
+var kickPattern = 1
+var vibe = 1
+
+kick: s("bd:2")
+  .bank("rolandtr808")
+  .struct(kickPatterns[kickPattern])
+  .gain(slider(1.083,0,3))
+
+hats: s("hh*8").bank("rolandtr808")
+
+snare: stack (
+  
+  s("squeak-drip")
+  .struct(vibes[vibe]).note("e|g|b")
+  .speed(0.2)
+  .velocity(slider(0.242,0,1))
+  .room(slider(1,0,3)),
+
+  s("wub")
+  .struct(vibes[vibe])
+  .gain(0.3)
+  
+)
+
+chords: stack (
+
+  note("<[e@3 g b] [f#@3 a c] [g@3 b d] [a@3 c e]>*2".add(slider(00,60)))
+  .n("<4 6 8 10>/2")
+  .s('triangle')
+  .room(slider(1,0,1)).size(0.9)
+  .velocity(slider(1,0,1))
+  .often(n => n.ply(1))
+  .release(0.125).decay("<0.1 0.25 0.3 0.4>").sustain(0)
+  .cutoff(2000).cutoff("<1000 2000 4000>")
+  .fast(4)
+  ._punchcard(),
+  
+  note("<[e@3 g b] [f#@3 a c] [g@3 b d] [a@3 c e]>*2")
+  .n("<4 6 8 10>/2")
+  .s('bubble-pop') 
+  .room(slider(0,0,1)).size(0.5)
+  .velocity(slider(0.394,0,1))
+  .often(n => n.ply(1))
+  .release(0.1).decay("<0.1 0.25 0.3 0.4>").sustain(0)
+  .cutoff(2000).cutoff("<1000 2000 4000>")
+  .fast(4)
+  ._scope())
+  
+bass: s("bd:1*8")
+  .bank("rolandtr808")
+  .gain(slider(0.942,0,3))
+
+clap: s("<bubble-pop*8? ->").speed(1)
+
+
+
+++++++++++ SONG 9 ++++++++++
+
+
+
+WIP Yummy Choppy Hold On
+
+
+
+samples('https://raw.githubusercontent.com/kaliryder/strudel/main/samples/strudel.json')
+
+$vox: s("hold-on")
+  .scrub(berlin.fast(3)
+  .seg(8))
+  .orbit(100)
+  .rib(20,10)
+.gain(slider(2,0,2))
+
+$kick: s("bd bd bd bd").bank("rolandtr909")
+
+$snare: s("~ mt:2*2 ~ [mt:2 | ~] ~ mt:2 ~ mt:2*4").bank("rolandtr909").gain(slider(1,0,1))
+
+$hats: s("hh*8").bank("rolandtr909")
